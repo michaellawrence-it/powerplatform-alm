@@ -2,10 +2,12 @@
 
 Promoting Power Platform solutions safely: a Dev to Sandbox to Production process with a validated rollback path.
 
-A methodology write-up, not a project dump. It captures how I move a Power Apps + Power Automate solution from where it is built to where real people depend on it, without a bad deployment taking production down and with a way back if one does.
+A methodology write-up, not a project dump. It captures how a Power Apps + Power Automate solution should move from where it is built to where real people depend on it, without a bad deployment taking production down and with a way back if one does.
+
+**Where this stands:** this is the target process, not a record of a past deployment. The app in [powerapps-employee-evaluations](https://github.com/michaellawrence-it/powerapps-employee-evaluations) moved across three environments by solution export, with each import validated before cutover. This playbook is the path from there to managed Sandbox and Production environments.
 
 ## Why this exists
-Power Platform makes it easy to build in the same place users work, which makes it dangerously easy to "fix it in production." A model-driven app backed by Dataverse, security-role logic, and a dozen flows is real software; it deserves real change management. This is the process I use so a promotion is boring on purpose.
+Power Platform makes it easy to build in the same place users work, which makes it dangerously easy to "fix it in production." A model-driven app backed by Dataverse, security-role logic, and a dozen flows is real software; it deserves real change management. This process makes a promotion boring on purpose.
 
 ## The environments
 ```
@@ -54,7 +56,7 @@ A promotion is only allowed if rollback is already in hand.
 - **The action:** re-import the backed-up managed solution, re-activate its flows, re-run the smoke test. Environment variables and connection references are re-applied from the known-good production settings file.
 - **Data safety:** schema-only rollbacks are clean; when a change touched data shape, the rollback plan is written *before* promotion so a revert never orphans records.
 
-See [rollback-checklist.md](rollback-checklist.md) for the one-page version I actually run.
+See [rollback-checklist.md](rollback-checklist.md) for the one-page version.
 
 ## Principles that make it boring
 - **Managed in every environment above Dev.** Reproducible packages, no drift, no "someone edited prod."
